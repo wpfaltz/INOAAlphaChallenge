@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% if ticker %}
+	{{ ticker }}
+{% endif %}
+
+
+{% if api %}
+	{% if api == "Error" %}
+		Houve um problema com o ticker de sua ação, tente novamente
+	{% else %}
+		<h1><b>{{ api.company }}</b></h1><br/>
+		<b>Código da ação: {{ api.companycode }}</b><br/>
+		Moeda utilizada para cotação: {{ api.currency }}<br/>
+		Fechamento pregão anterior: {{ api.previousday }}<br/>
+		Preço atual: {{ api.latest }}<br/>
+		Variação absoluta no preço da ação: {{ api.change }}<br/>
+		Variação percentual no preço da ação: {{ api.changepercent }}<br/>
+	{% endif %}
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+        <center>
+        <h1>Aqui ficarão as ações a serem observadas para compra</h1>
+        <br/><br/>
+        {% if submitted %}
+                Ações adicionadas à lista de observação com sucesso!<br/><br/>
+
+        {% else %}
+                <form action="" class="d-flex" role="search" method="POST">
+                        {% csrf_token %}        
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-success">Adicionar à lista de observação
+                        </button>
+                </form>
+        <br/>
+        {% endif %}
+
+<table class="table table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Ticker Ação</th>
+      <th scope="col">Nome da Empresa</th>
+      <th scope="col">Moeda Cotação</th>
+      <th scope="col">Preço MÁX Compra Desejado</th>
+      <th scope="col">Fechamento Pregão Anterior</th>
+      <th scope="col">Preço Atual</th>
+      <th scope="col">Variação Absoluta Intraday</th>
+      <th scope="col">Variação % Intraday</th>
+      <th scope="col">Remover</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in table %}
+        <tr>
+                <th scope="row">{{ item }}</th>
+                <td>Nome Empresa</td>
+                <td>Moeda</td>
+                <td>{{ item.price_watch }}</td>
+                <td>Info da API</td>
+                <td>Info 2 da API</td>
+                <td>Info 3 da API</td>
+                <td>Info 4 da API</td>
+                <td><a href="{% url 'delete_from_watchlist' item.id %}"> Delete </a></td>
+        </tr>
+        {% endfor %}
+  </tbody>
+</table>
+</center>
+
+<br/><br/>
+{{ output }}
+
+
+
+{% endblock %}
